@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caça ao Tesouro para Julia</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container" id="container">
+        <!-- Página Inicial -->
+        <div class="page active" id="page-start">
+            <h1>Espero que isso te ajude, preta!</h1>
+            <button id="start-btn">Iniciar</button>
+        </div>
+        
+        <!-- Mensagem de Início da Caça ao Tesouro -->
+        <div class="page" id="page-intro">
+            <h2>Separei três surpresas para você, espero que aproveite!!!</h2>
+            <button id="next-btn">Próximo</button>
+        </div>
+        
+        <!-- Seletor de Surpresas -->
+        <div class="page" id="page-surprises">
+            <p>Escolha uma:</p>
+            <div id="surprises">
+                <a href="/tour.html"><button class="surprise-btn">Surpresa 1</button></a>
+                <button class="surprise-btn">Surpresa 2</button>
+                <button class="surprise-btn">Surpresa 3</button>
+            </div>
+        </div>
+        
+        <!-- Surpresas Detalhes -->
+        <div class="page" id="page-detail1" style="display: none;">
+            <link rel="stylesheet" href="/tour.html">
+            <!-- Conteúdo da Surpresa 1 -->
+        </div>
+        <div class="page" id="page-detail2" style="display: none;">
+            <h2>Detalhes da Surpresa 2</h2>
+            <!-- Conteúdo da Surpresa 2 -->
+        </div>
+        <div class="page" id="page-detail3" style="display: none;">
+            <h2>Detalhes da Surpresa 3</h2>
+            <!-- Conteúdo da Surpresa 3 -->
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
