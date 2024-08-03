@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dica 2 - Caça ao Tesouro para Julia</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            background: linear-gradient(270deg, #1e3c72, #2a5298, #73a5ff, #a2d2ff);
+            background-size: 600% 600%;
+            animation: gradientAnimation 12s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 50% 100%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            75% {
+                background-position: 50% 0%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h2 {
+            margin: 0 0 20px;
+            font-size: 24px;
+            color: #007BFF;
+        }
+
+        #word-game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #word-game-board {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 5px;
+        }
+
+        .drop-zone {
+            width: 40px;
+            height: 40px;
+            border: 2px dashed #007BFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+        }
+
+        #word-game-letters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 5px;
+        }
+
+        .draggable-letter {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #007BFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+      
+        #word-game-result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #007BFF;
+        }
+
+        #word-game-next-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #word-game-next-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsivo */
+        @media (max-width: 600px) {
+            .drop-zone,
+            .draggable-letter {
+                width: 30px;
+                height: 30px;
+                font-size: 18px;
+            }
+
+
+            h2 {
+                font-size: 20px;
+            }
+
+            #word-game-board,
+            #word-game-letters {
+                gap: 3px;
+            }
+
+            .btt{
+                margin-top: 30px;
+            }
+
+            .btt{
+                text-decoration: none;
+            }
+
+            .o{
+                margin-right: 100px;
+            }
+    
+            .b{
+                margin-left: 100px;
+            }
+    
+
+            #word-game-next-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="page-word-game">
+        <h2>Uma famosa rua de bruxos, cheia de lojas mágicas...</h2>
+        <div id="word-game-container">
+            <div id="word-game-board">
+                <!-- Zonas de queda para a palavra "BECO DIAGONAL" -->
+                <div class="drop-zone b" data-letter="B"></div>
+                <div class="drop-zone" data-letter="E"></div>
+                <div class="drop-zone" data-letter="C"></div>
+                <div class="drop-zone o" data-letter="O"></div>
+                <div class="drop-zone" data-letter="D"></div>
+                <div class="drop-zone" data-letter="I"></div>
+                <div class="drop-zone" data-letter="A"></div>
+                <div class="drop-zone" data-letter="G"></div>
+                <div class="drop-zone" data-letter="O"></div>
+                <div class="drop-zone" data-letter="N"></div>
+                <div class="drop-zone" data-letter="A"></div>
+                <div class="drop-zone" data-letter="L"></div>
+            </div>
+            <div id="word-game-letters">
+                <!-- Letras arrastáveis (embaralhadas) -->
+                <div class="draggable-letter" draggable="true" data-letter="G">G</div>
+                <div class="draggable-letter" draggable="true" data-letter="L">L</div>
+                <div class="draggable-letter" draggable="true" data-letter="A">A</div>
+                <div class="draggable-letter" draggable="true" data-letter="B">B</div>
+                <div class="draggable-letter" draggable="true" data-letter="N">N</div>
+                <div class="draggable-letter" draggable="true" data-letter="C">C</div>
+                <div class="draggable-letter" draggable="true" data-letter="I">I</div>
+                <div class="draggable-letter" draggable="true" data-letter="O">O</div>
+                <div class="draggable-letter" draggable="true" data-letter="E">E</div>
+                <div class="draggable-letter" draggable="true" data-letter="O">O</div>
+                <div class="draggable-letter" draggable="true" data-letter="A">A</div>
+                <div class="draggable-letter" draggable="true" data-letter="D">D</div>
+            </div>
+            <div id="word-game-result"></div>
+            <a href="tour.html"><button id="word-game-next-btn" class="btt" style="display:none;">Próxima Dica</button></a>
+        </div>
+    </div>
+
+    <script>
+        const letters = document.querySelectorAll('.draggable-letter');
+        const dropZones = document.querySelectorAll('.drop-zone');
+        const wordGameResult = document.getElementById('word-game-result');
+        const wordGameNextBtn = document.getElementById('word-game-next-btn');
+
+        letters.forEach(letter => {
+            letter.addEventListener('click', () => {
+                const emptyZone = Array.from(dropZones).find(zone => !zone.textContent);
+                if (emptyZone) {
+                    emptyZone.textContent = letter.textContent;
+                    letter.style.display = 'none';
+                    checkWordCompletion();
+                }
+            });
+        });
+
+        dropZones.forEach(zone => {
+            zone.addEventListener('click', () => {
+                const letterToReturn = Array.from(letters).find(letter => letter.textContent === zone.textContent && letter.style.display === 'none');
+                if (letterToReturn) {
+                    letterToReturn.style.display = 'flex';
+                    zone.textContent = '';
+                }
+            });
+        });
+
+        function checkWordCompletion() {
+            const formedWord = Array.from(dropZones).map(zone => zone.textContent).join('').replace(/\s+/g, '');
+            if (formedWord === 'BECODIAGONAL') {
+                wordGameResult.textContent = 'Correto! Que tal darmos uma passadinha lá?';
+                wordGameNextBtn.style.display = 'block';
+                wordGameResult.style.color = 'green';
+            } else {
+                wordGameResult.textContent = 'Ainda não está certo. Continue tentando!';
+                wordGameResult.style.color = 'red';
+            }
+        }
+
+        wordGameNextBtn.addEventListener('click', () => {
+            // Adicionar lógica para ir para a próxima dica
+        });
+    </script>
+</body>
+</html>

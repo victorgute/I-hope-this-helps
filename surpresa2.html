@@ -1,0 +1,130 @@
+<!-- HTML -->
+<div class="page" id="page-word-game">
+    <h2>Arraste as letras para formar a palavra correta:</h2>
+    <div id="word-game-container">
+        <div id="word-game-board">
+            <div class="drop-zone" data-letter="H"></div>
+            <div class="drop-zone" data-letter="A"></div>
+            <div class="drop-zone" data-letter="R"></div>
+            <div class="drop-zone" data-letter="R"></div>
+            <div class="drop-zone" data-letter="Y"></div>
+        </div>
+        <div id="word-game-letters">
+            <div class="draggable-letter" draggable="true" data-letter="H">H</div>
+            <div class="draggable-letter" draggable="true" data-letter="A">A</div>
+            <div class="draggable-letter" draggable="true" data-letter="R">R</div>
+            <div class="draggable-letter" draggable="true" data-letter="R">R</div>
+            <div class="draggable-letter" draggable="true" data-letter="Y">Y</div>
+        </div>
+        <div id="word-game-result"></div>
+        <button id="word-game-next-btn" style="display:none;">Próxima Dica</button>
+    </div>
+</div>
+
+<!-- CSS -->
+<style>
+    #word-game-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #word-game-board {
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    .drop-zone {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 5px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    #word-game-letters {
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    .draggable-letter {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 5px;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: #fff;
+    }
+
+    #word-game-result {
+        margin-top: 20px;
+        font-size: 18px;
+        color: green;
+    }
+
+    #word-game-next-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #word-game-next-btn:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<!-- JavaScript -->
+<script>
+    const letters = document.querySelectorAll('.draggable-letter');
+    const dropZones = document.querySelectorAll('.drop-zone');
+    const wordGameResult = document.getElementById('word-game-result');
+    const wordGameNextBtn = document.getElementById('word-game-next-btn');
+
+    letters.forEach(letter => {
+        letter.addEventListener('dragstart', () => {
+            letter.classList.add('dragging');
+        });
+
+        letter.addEventListener('dragend', () => {
+            letter.classList.remove('dragging');
+        });
+    });
+
+    dropZones.forEach(zone => {
+        zone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const dragging = document.querySelector('.dragging');
+            zone.appendChild(dragging);
+            checkWordCompletion();
+        });
+    });
+
+    function checkWordCompletion() {
+        const formedWord = Array.from(dropZones).map(zone => zone.textContent).join('');
+        if (formedWord === 'HARRY') {
+            wordGameResult.textContent = 'Correto! Clique no botão para a próxima dica.';
+            wordGameNextBtn.style.display = 'block';
+        } else {
+            wordGameResult.textContent = 'Errado, tente novamente!';
+            wordGameResult.style.color = 'red';
+        }
+    }
+
+    wordGameNextBtn.addEventListener('click', () => {
+        document.getElementById('page-word-game').classList.remove('active');
+        document.getElementById('page-surprises').classList.add('active');
+    });
+</script>
