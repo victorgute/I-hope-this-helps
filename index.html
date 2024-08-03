@@ -23,16 +23,14 @@
         <!-- Seletor de Surpresas -->
         <div class="page" id="page-surprises">
             <p>Escolha uma:</p>
-            <div id="surprises">
-                <a href="tour.html"><button class="surprise-btn">Surpresa 1</button></a>
-                <button class="surprise-btn">Surpresa 2</button>
-                <button class="surprise-btn">Surpresa 3</button>
-            </div>
+            <button class="surprise-btn" data-target="page-detail1">Surpresa 1</button>
+            <button class="surprise-btn" data-target="page-detail2">Surpresa 2</button>
+            <button class="surprise-btn" data-target="page-detail3">Surpresa 3</button>
         </div>
         
         <!-- Surpresas Detalhes -->
         <div class="page" id="page-detail1" style="display: none;">
-            <link rel="stylesheet" href="/tour.html">
+            <h2>Detalhes da Surpresa 1</h2>
             <!-- Conteúdo da Surpresa 1 -->
         </div>
         <div class="page" id="page-detail2" style="display: none;">
@@ -47,3 +45,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
