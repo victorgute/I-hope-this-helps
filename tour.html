@@ -17,64 +17,21 @@
             height: 100vh;
             margin: 0;
             padding: 0;
+            position: relative;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
 <body>
-    <div id="container"></div>
-
-    <!-- Three.js Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- Three.js OrbitControls for Device Motion -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/controls/OrbitControls.js"></script>
-    
-    <script>
-        // Initialize scene
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('container').appendChild(renderer.domElement);
-
-        // Add panoramic texture
-        const loader = new THREE.TextureLoader();
-        loader.load('https://www.example.com/path-to-your-image.jpg', function (texture) {
-            const geometry = new THREE.SphereGeometry(500, 60, 40);
-            geometry.scale(-1, 1, 1); // Invert the geometry
-            const material = new THREE.MeshBasicMaterial({ map: texture });
-            const sphere = new THREE.Mesh(geometry, material);
-            scene.add(sphere);
-        });
-
-        // Set camera position
-        camera.position.set(0, 0, 0);
-
-        // Add OrbitControls for device motion
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.enableZoom = false;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            controls.update(); // Update controls for device motion
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
-        // Resize handler
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        // Device orientation
-        window.addEventListener('deviceorientation', (event) => {
-            const alpha = event.alpha ? THREE.MathUtils.degToRad(event.alpha) : 0;
-            const beta = event.beta ? THREE.MathUtils.degToRad(event.beta) : 0;
-            const gamma = event.gamma ? THREE.MathUtils.degToRad(event.gamma) : 0;
-            controls.setObjectPosition(alpha, beta, gamma);
-        });
-    </script>
+    <div id="container">
+        <!-- Substitua o URL abaixo pelo URL correto do Google Maps -->
+        <iframe src="https://www.google.com/maps/embed?pb=!4v1722657739855!6m8!1m7!1sCAoSLEFGMVFpcE5VX0xDdEdlRjBsMHRld3BvUVVBTXdXX0VUbWtjZkc1amgwUjlP!2m2!1d51.69312074344851!2d-0.4196777429447138!3f22.09070246082483!4f-9.788640905587641!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
 </body>
 </html>
+
