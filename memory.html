@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Memória</title>
+    <link rel="stylesheet" href="memory.css">
+</head>
+<body>
+    <div class="dicas" id="dicas">
+        <h1>Primeiro Desafio</h1>
+        <p class="mini">É um jogo de mémoria, que possui personagens que fazem parte do lugar que você tem que descubrir</p>
+        <button onclick="mostrarDica1()">Vamos lá</button>
+        <button id="dica2-btn" onclick="mostrarDica2()" style="display: none;">Dica 2</button>
+        <button id="dica3-btn" onclick="mostrarDica3()" style="display: none;">Dica 3</button>
+    </div>
+
+    <div class="memory-game-container" id="memory-game-container" style="display: none;">
+        <div class="memory-game">
+            <!-- Cartas do Jogo da Memória -->
+            <div class="memory-card" data-name="harry">
+                <img class="front-face" src="images/grifi.jpg" alt="Harry Potter">
+                <img class="back-face" src="images/back.jpg" alt="Memory Card">
+            </div>
+            <div class="memory-card" data-name="harry">
+                <img class="front-face" src="images/grifi.jpg" alt="Harry Potter">
+                <img class="back-face" src="images/back.jpg" alt="Memory Card">
+            </div>
+            <div class="memory-card" data-name="hermione">
+                <img class="front-face" src="images/Hermione.jpg" alt="Hermione Granger">
+                <img class="back-face" src="images/back.jpg" alt="Memory Card">
+            </div>
+            <div class="memory-card" data-name="hermione">
+                <img class="front-face" src="images/Hermione.jpg" alt="Hermione Granger">
+                <img class="back-face" src="images/back.jpg" alt="Memory Card">
+            </div>
+            <div class="memory-card" data-name="ron">
+                <img class="front-face" src="images/piclekes.rick.jpg" alt="Ron Weasley">
+                <img class="back-face" src="images/back.jpg" alt="Memory Card">
+            </div>
+            <div class="memory-card" data-name="ron">
+                <img class="front-face" src="images/piclekes.rick.jpg" alt="Ron Weasley">
+                <img class="back-face" src="images/back.jpg" alt="Memory Card">
+            </div>
+            <div class="memory-card" data-name="dumbledore">
+                <img class="front-face" src="images/Morty.JPG" alt="Dumbledore">
+                <img class="back-face" src="images/back.jpg" alt="Memory Card">
+            </div>
+            <div class="memory-card" data-name="dumbledore">
+                <img class="front-face" src="images/Morty.JPG" alt="Dumbledore">
+                <img class="back-face" src="images/back.jpg" alt="Memory Card">
+            </div>
+            <div class="memory-card" data-name="voldemort">
+                <img class="front-face" src="images/cinco.jpeg" alt="Voldemort">
+                <img class="back-face" src="images/back.jpg" alt="Memory Card">
+            </div>
+            <div class="memory-card" data-name="voldemort">
+                <img class="front-face" src="images/cinco.jpeg" alt="Voldemort">
+                <img class="back-face" src="images/back.jpg" alt="Memory Card">
+            </div>
+            <div class="memory-card" data-name="hagrid">
+                <img class="front-face" src="images/poco.jpg" alt="Hagrid">
+                <img class="back-face" src="images/back.jpg" alt="Memory Card">
+            </div>
+            <div class="memory-card" data-name="hagrid">
+                <img class="front-face" src="images/poco.jpg" alt="Hagrid">
+                <img class="back-face" src="images/back.jpg" alt="Memory Card">
+            </div>
+        </div>
+        <div class="complete-container" id="complete-container" style="display: none;">
+            <button id="next-hint-btn">Próxima Dica</button>
+        </div>
+    </div>
+
+    <script src="memory.js"></script>
+</body>
+</html>

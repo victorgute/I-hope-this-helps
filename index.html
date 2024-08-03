@@ -5,6 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caça ao Tesouro para Julia</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .page {
+            display: none;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        h1, h2 {
+            margin: 0 0 20px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .surprise-btn {
+            display: block;
+            margin: 10px auto;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .surprise-btn + .surprise-btn {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="container" id="container">
@@ -16,16 +78,14 @@
         
         <!-- Mensagem de Início da Caça ao Tesouro -->
         <div class="page" id="page-intro">
-            <h2>Separei três surpresas para você, espero que aproveite!!!</h2>
+            <h2>O objetivo é você descubrir qual lugar eu estou falando, e se descubrir vou te levar até ele, vou te dar 3 dicas para você tentar acerta. <br> Boa sorte!!!</h2>
             <button id="next-btn">Próximo</button>
         </div>
         
         <!-- Seletor de Surpresas -->
         <div class="page" id="page-surprises">
-            <p>Escolha uma:</p>
-            <button class="surprise-btn" data-target="page-detail1">Surpresa 1</button>
-            <button class="surprise-btn" data-target="page-detail2">Surpresa 2</button>
-            <a href="tour.html"><button class="surprise-btn" data-target="page-detail3">Surpresa 3</button></a>
+            <p>Primeira Dica:</p>
+            <a href="memory.html"><button class="surprise-btn">Dica 1</button></a>
         </div>
     </div>
     <script src="script.js"></script>
