@@ -1,130 +1,150 @@
-<!-- HTML -->
-<div class="page" id="page-word-game">
-    <h2>Arraste as letras para formar a palavra correta:</h2>
-    <div id="word-game-container">
-        <div id="word-game-board">
-            <div class="drop-zone" data-letter="H"></div>
-            <div class="drop-zone" data-letter="A"></div>
-            <div class="drop-zone" data-letter="R"></div>
-            <div class="drop-zone" data-letter="R"></div>
-            <div class="drop-zone" data-letter="Y"></div>
-        </div>
-        <div id="word-game-letters">
-            <div class="draggable-letter" draggable="true" data-letter="H">H</div>
-            <div class="draggable-letter" draggable="true" data-letter="A">A</div>
-            <div class="draggable-letter" draggable="true" data-letter="R">R</div>
-            <div class="draggable-letter" draggable="true" data-letter="R">R</div>
-            <div class="draggable-letter" draggable="true" data-letter="Y">Y</div>
-        </div>
-        <div id="word-game-result"></div>
-        <button id="word-game-next-btn" style="display:none;">Próxima Dica</button>
-    </div>
-</div>
-
-<!-- CSS -->
-<style>
-    #word-game-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    #word-game-board {
-        display: flex;
-        margin-bottom: 20px;
-    }
-
-    .drop-zone {
-        width: 40px;
-        height: 40px;
-        border: 1px solid #000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 5px;
-        font-size: 24px;
-        font-weight: bold;
-    }
-
-    #word-game-letters {
-        display: flex;
-        margin-bottom: 20px;
-    }
-
-    .draggable-letter {
-        width: 40px;
-        height: 40px;
-        border: 1px solid #000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 5px;
-        font-size: 24px;
-        font-weight: bold;
-        cursor: pointer;
-        background-color: #fff;
-    }
-
-    #word-game-result {
-        margin-top: 20px;
-        font-size: 18px;
-        color: green;
-    }
-
-    #word-game-next-btn {
-        padding: 10px 20px;
-        font-size: 16px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    #word-game-next-btn:hover {
-        background-color: #45a049;
-    }
-</style>
-
-<!-- JavaScript -->
-<script>
-    const letters = document.querySelectorAll('.draggable-letter');
-    const dropZones = document.querySelectorAll('.drop-zone');
-    const wordGameResult = document.getElementById('word-game-result');
-    const wordGameNextBtn = document.getElementById('word-game-next-btn');
-
-    letters.forEach(letter => {
-        letter.addEventListener('dragstart', () => {
-            letter.classList.add('dragging');
-        });
-
-        letter.addEventListener('dragend', () => {
-            letter.classList.remove('dragging');
-        });
-    });
-
-    dropZones.forEach(zone => {
-        zone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            const dragging = document.querySelector('.dragging');
-            zone.appendChild(dragging);
-            checkWordCompletion();
-        });
-    });
-
-    function checkWordCompletion() {
-        const formedWord = Array.from(dropZones).map(zone => zone.textContent).join('');
-        if (formedWord === 'HARRY') {
-            wordGameResult.textContent = 'Correto! Clique no botão para a próxima dica.';
-            wordGameNextBtn.style.display = 'block';
-        } else {
-            wordGameResult.textContent = 'Errado, tente novamente!';
-            wordGameResult.style.color = 'red';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Caça ao Tesouro para Julia</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            background: linear-gradient(270deg, #1e3c72, #2a5298, #73a5ff, #a2d2ff);
+            background-size: 600% 600%;
+            animation: gradientAnimation 12s ease infinite;
         }
-    }
 
-    wordGameNextBtn.addEventListener('click', () => {
-        document.getElementById('page-word-game').classList.remove('active');
-        document.getElementById('page-surprises').classList.add('active');
-    });
-</script>
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 50% 100%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            75% {
+                background-position: 50% 0%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h2 {
+            margin: 0 0 20px;
+            font-size: 24px;
+            color: #007BFF;
+        }
+
+        .quiz-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .quiz-question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-option {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .quiz-option:hover {
+            background-color: #0056b3;
+        }
+
+        .quiz-result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #007BFF;
+        }
+
+        .pp{
+            font-size: 25px;
+        }
+
+        #start-quiz-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #start-quiz-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="page-introduction">
+        <h2>Desafio 2</h2>
+        <p class="pp">Bom, dois dos personagens que eu te mostrei anteriormente fazem parte do lugar que quero te mostrar, bastadescobrir agora.
+            Mas vou te ajudar, criei algumas perguntas sobre o universo desse lugar!!
+        </p>
+        <button id="start-quiz-btn">Iniciar Quiz</button>
+    </div>
+    
+    <div class="container" id="page-quiz" style="display: none;">
+        <div class="quiz-container">
+            <div id="quiz-question" class="quiz-question">Qual é a sua pergunta?</div>
+            <button class="quiz-option">Opção 1</button>
+            <button class="quiz-option">Opção 2</button>
+            <button class="quiz-option">Opção 3</button>
+            <button class="quiz-option">Opção 4</button>
+            <div id="quiz-result" class="quiz-result"></div>
+        </div>
+    </div>
+
+    <script>
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const pageIntroduction = document.getElementById('page-introduction');
+        const pageQuiz = document.getElementById('page-quiz');
+
+        startQuizBtn.addEventListener('click', () => {
+            pageIntroduction.style.display = 'none';
+            pageQuiz.style.display = 'flex';
+        });
+
+        // Adicione a lógica do quiz aqui
+    </script>
+</body>
+</html>
