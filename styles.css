@@ -2,26 +2,19 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    background-color: #f0f0f0;
 }
 
 .container {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
 }
 
 .page {
     display: none;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .page.active {
@@ -29,34 +22,11 @@ body {
 }
 
 button {
-    margin: 10px;
     padding: 10px 20px;
     font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007BFF;
-    color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #0056b3;
-}
-
-h1, h2 {
-    color: #333;
-}
-
-p {
-    font-size: 18px;
-    color: #666;
-}
-
-.tour-btn {
-    background-color: #28a745;
-}
-
-.tour-btn:hover {
-    background-color: #218838;
+.surprise-btn {
+    margin: 10px;
 }
