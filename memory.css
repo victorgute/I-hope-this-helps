@@ -115,5 +115,10 @@ body {
     .memory-game {
         width: 100%;
         max-width: none;
+        margin-left: 20px;
+    }
+
+    .memory-game div{
+        width: 100px;
     }
 }
