@@ -109,7 +109,44 @@
             transition: background-color 0.3s;
         }
 
+        .ll {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
         #start-quiz-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #finish-message {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #007BFF;
+        }
+
+        #go-to-place-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        #go-to-place-btn:hover {
             background-color: #0056b3;
         }
     </style>
@@ -123,7 +160,7 @@
         <button id="start-quiz-btn">Iniciar Quiz</button>
     </div>
     
-    <div class="container" id="page-quiz" style="display: none;">
+    <div class="container hidden" id="page-quiz">
         <div class="quiz-container">
             <div id="quiz-question" class="quiz-question"></div>
             <button class="quiz-option"></button>
@@ -131,7 +168,9 @@
             <button class="quiz-option"></button>
             <button class="quiz-option"></button>
             <div id="quiz-result" class="quiz-result"></div>
-            <button id="next-question-btn" style="display: none;">Próxima Pergunta</button>
+            <button id="next-question-btn" class="ll hidden">Próxima Pergunta</button>
+            <div id="finish-message" class="hidden">Que tal darmos uma passadinha lá???</div>
+            <a href="tour.html"><button id="go-to-place-btn" class="hidden">Vamos lá</button></a>
         </div>
     </div>
 
@@ -143,58 +182,78 @@
         const quizOptions = document.querySelectorAll('.quiz-option');
         const quizResult = document.getElementById('quiz-result');
         const nextQuestionBtn = document.getElementById('next-question-btn');
+        const finishMessage = document.getElementById('finish-message');
+        const goToPlaceBtn = document.getElementById('go-to-place-btn');
 
         const questions = [
             {
-                question: "Qual é o lugar famoso para comprar varinhas mágicas em Harry Potter?",
-                options: ["Beco Diagonal", "Hogsmeade", "Godric's Hollow", "O Ministério da Magia"],
-                answer: "Beco Diagonal"
+                question: "Qual é o nome do bruxo que matou os pais de Harry Potter?",
+                options: ["Lord Voldemort", "Lucius Malfoy", "Bellatrix Lestrange", "Severus Snape"],
+                answer: "Lord Voldemort"
             },
             {
-                question: "Qual loja é conhecida por vender varinhas em Beco Diagonal?",
-                options: ["Oliveira e Filhos", "Taverna Três Vassouras", "Lojinha do Harry", "Gringotes"],
-                answer: "Oliveira e Filhos"
+                question: "Qual é o nome do melhor amigo de Harry Potter?",
+                options: ["Ron Weasley", "Neville Longbottom", "Draco Malfoy", "Cedric Diggory"],
+                answer: "Ron Weasley"
             },
             {
-                question: "Qual é o nome do banco dos bruxos em Harry Potter?",
-                options: ["Gringotes", "Banco dos Bruxos", "Banco Mágico", "Tesouros Mágicos"],
-                answer: "Gringotes"
+                question: "Qual é a casa de Harry Potter em Hogwarts?",
+                options: ["Grifinória", "Sonserina", "Lufa-Lufa", "Corvinal"],
+                answer: "Grifinória"
             },
             {
-                question: "Qual é a loja famosa de quadribol em Beco Diagonal?",
-                options: ["Ferro e Fogo", "Empório das Varinhas", "A Loja do Quadribol", "Sapo de Chocolate"],
-                answer: "A Loja do Quadribol"
+                question: "Qual é o nome do diretor de Hogwarts durante a maior parte da série?",
+                options: ["Alvo Dumbledore", "Minerva McGonagall", "Rubeus Hagrid", "Sybill Trelawney"],
+                answer: "Alvo Dumbledore"
             },
             {
-                question: "Qual é o nome da rua onde você encontra o Caldeirão Furado?",
-                options: ["Rua dos Dragões", "Beco Diagonal", "Rua dos Feiticeiros", "Avenida Mágica"],
-                answer: "Beco Diagonal"
+                question: "Qual é o nome do trio principal da série Harry Potter?",
+                options: ["Harry, Ron e Hermione", "Harry, Draco e Pansy", "Harry, Neville e Luna", "Harry, Cedric e Cho"],
+                answer: "Harry, Ron e Hermione"
             }
         ];
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
 
         let currentQuestionIndex = 0;
 
         function loadQuestion() {
             const question = questions[currentQuestionIndex];
             quizQuestion.textContent = question.question;
+
+            const options = [...question.options];
+            shuffle(options);
+
             quizOptions.forEach((option, index) => {
-                option.textContent = question.options[index];
-                option.addEventListener('click', () => checkAnswer(option.textContent));
+                option.textContent = options[index];
+                option.removeEventListener('click', handleOptionClick); // Remove previous listeners
+                option.addEventListener('click', handleOptionClick);
+                option.style.display = 'block'; // Make sure all options are visible
+                option.classList.remove('hidden');
             });
-            nextQuestionBtn.style.display = 'none';
+
+            nextQuestionBtn.classList.add('hidden');
             quizResult.textContent = '';
         }
 
-        function checkAnswer(selectedAnswer) {
+        function handleOptionClick(event) {
+            const selectedAnswer = event.target.textContent;
             const correctAnswer = questions[currentQuestionIndex].answer;
+            
             if (selectedAnswer === correctAnswer) {
                 quizResult.textContent = 'Resposta correta!';
                 quizResult.style.color = 'green';
+                nextQuestionBtn.classList.remove('hidden');
             } else {
                 quizResult.textContent = 'Resposta incorreta. Tente novamente!';
                 quizResult.style.color = 'red';
+                event.target.classList.add('hidden');
             }
-            nextQuestionBtn.style.display = 'block';
         }
 
         nextQuestionBtn.addEventListener('click', () => {
@@ -204,13 +263,15 @@
             } else {
                 quizQuestion.textContent = 'Parabéns! Você completou o quiz.';
                 quizOptions.forEach(option => option.style.display = 'none');
-                nextQuestionBtn.style.display = 'none';
+                nextQuestionBtn.classList.add('hidden');
+                finishMessage.classList.remove('hidden');
+                goToPlaceBtn.classList.remove('hidden');
             }
         });
 
         startQuizBtn.addEventListener('click', () => {
-            pageIntroduction.style.display = 'none';
-            pageQuiz.style.display = 'flex';
+            pageIntroduction.classList.add('hidden');
+            pageQuiz.classList.remove('hidden');
             loadQuestion();
         });
     </script>

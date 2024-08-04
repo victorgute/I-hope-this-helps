@@ -4,12 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo da Memória</title>
-    <link rel="stylesheet" href="css/memory.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            flex-direction: column;
+            padding: 0 10px; /* Adiciona algum espaço lateral em dispositivos móveis */
+        }
+
+        .dicas {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .dicas h1 {
+            font-size: 28px;
+            color: #009933;
+        }
+
+        .dicas .mini {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .dicas button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #009933;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dicas button:hover {
+            background-color: #007a00;
+        }
+
+        .memory-game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .memory-game {
+            width: 100%;
+            max-width: 640px;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-wrap: wrap;
+            perspective: 1000px;
+        }
+
+        .memory-card {
+            width: calc(25% - 10px);
+            height: calc(33.333% - 10px);
+            margin: 5px;
+            position: relative;
+            transform: scale(1);
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+
+        .memory-card.flip {
+            transform: rotateY(180deg);
+        }
+
+        .memory-card .front-face,
+        .memory-card .back-face {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            border-radius: 5px;
+        }
+
+        .memory-card .front-face {
+            transform: rotateY(180deg);
+        }
+
+        .complete-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #next-hint-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #009933;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #next-hint-btn:hover {
+            background-color: #007a00;
+        }
+
+        /* Media Query para telas menores */
+        @media (max-width: 768px) {
+            .memory-card {
+                width: calc(33.333% - 10px);
+                height: calc(50% - 10px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .memory-card {
+                width: calc(50% - 10px);
+                height: calc(50% - 10px);
+            }
+
+            .memory-game {
+                width: 90%;
+                max-width: none;
+                margin-left: 20px;
+            }
+
+            .memory-game div {
+                width: 100px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="dicas" id="dicas">
         <h1>Primeiro Desafio</h1>
-        <p class="mini">É um jogo de mémoria, que possui personagens que fazem parte do lugar que você tem que descubrir</p>
+        <p class="mini">É um jogo de memória, que possui personagens que fazem parte do lugar que você tem que descobrir</p>
         <button onclick="mostrarDica1()">Vamos lá</button>
     </div>
 
@@ -66,7 +197,7 @@
             </div>
         </div>
         <div class="complete-container" id="complete-container" style="display: none;">
-            <a href="surpresa3.html"><button id="next-hint-btn">Próxima Dica</button></a>
+            <a href="surpresa2.html"><button id="next-hint-btn">Próxima Dica</button></a>
         </div>
     </div>
 
