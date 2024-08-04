@@ -58,8 +58,41 @@
             color: #007BFF;
         }
 
-        #word-game-container {
+        #intro-screen, #word-game-container {
+            display: none;
+        }
+
+        #intro-screen.active, #word-game-container.active {
             display: flex;
+        }
+
+        #intro-screen {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #intro-screen h2 {
+            margin-bottom: 20px;
+        }
+
+        #intro-screen button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #intro-screen button:hover {
+            background-color: #0056b3;
+        }
+
+        #word-game-container {
             flex-direction: column;
             align-items: center;
         }
@@ -85,6 +118,18 @@
             background-color: #f0f0f0;
         }
 
+        .o{
+            margin-right: 100px;
+        }
+
+        .b{
+            margin-left: 100px;
+        }
+
+        .op{
+            font-size: 20px;
+        }
+
         #word-game-letters {
             display: flex;
             flex-wrap: wrap;
@@ -107,7 +152,6 @@
             border-radius: 5px;
         }
 
-      
         #word-game-result {
             margin-top: 20px;
             font-size: 18px;
@@ -138,7 +182,6 @@
                 font-size: 18px;
             }
 
-
             h2 {
                 font-size: 20px;
             }
@@ -148,24 +191,7 @@
                 gap: 3px;
             }
 
-            .btt{
-                margin-top: 30px;
-            }
-
-            .btt{
-                text-decoration: none;
-            }
-
-            .o{
-                margin-right: 100px;
-            }
-    
-            .b{
-                margin-left: 100px;
-            }
-    
-
-            #word-game-next-btn {
+            #intro-screen button {
                 padding: 8px 16px;
                 font-size: 14px;
             }
@@ -173,45 +199,54 @@
     </style>
 </head>
 <body>
-    <div class="container" id="page-word-game">
+    <div id="intro-screen" class="container active">
+        <h2>Surpresa Final</h2>
+        <p class="op">Agora, você só precisa acerta o lugar.</p>
+        <button id="start-btn">Começar</button>
+    </div>
+
+    <div id="word-game-container" class="container">
         <h2>Uma famosa rua de bruxos, cheia de lojas mágicas...</h2>
-        <div id="word-game-container">
-            <div id="word-game-board">
-                <!-- Zonas de queda para a palavra "BECO DIAGONAL" -->
-                <div class="drop-zone b" data-letter="B"></div>
-                <div class="drop-zone" data-letter="E"></div>
-                <div class="drop-zone" data-letter="C"></div>
-                <div class="drop-zone o" data-letter="O"></div>
-                <div class="drop-zone" data-letter="D"></div>
-                <div class="drop-zone" data-letter="I"></div>
-                <div class="drop-zone" data-letter="A"></div>
-                <div class="drop-zone" data-letter="G"></div>
-                <div class="drop-zone" data-letter="O"></div>
-                <div class="drop-zone" data-letter="N"></div>
-                <div class="drop-zone" data-letter="A"></div>
-                <div class="drop-zone" data-letter="L"></div>
-            </div>
-            <div id="word-game-letters">
-                <!-- Letras arrastáveis (embaralhadas) -->
-                <div class="draggable-letter" draggable="true" data-letter="G">G</div>
-                <div class="draggable-letter" draggable="true" data-letter="L">L</div>
-                <div class="draggable-letter" draggable="true" data-letter="A">A</div>
-                <div class="draggable-letter" draggable="true" data-letter="B">B</div>
-                <div class="draggable-letter" draggable="true" data-letter="N">N</div>
-                <div class="draggable-letter" draggable="true" data-letter="C">C</div>
-                <div class="draggable-letter" draggable="true" data-letter="I">I</div>
-                <div class="draggable-letter" draggable="true" data-letter="O">O</div>
-                <div class="draggable-letter" draggable="true" data-letter="E">E</div>
-                <div class="draggable-letter" draggable="true" data-letter="O">O</div>
-                <div class="draggable-letter" draggable="true" data-letter="A">A</div>
-                <div class="draggable-letter" draggable="true" data-letter="D">D</div>
-            </div>
-            <div id="word-game-result"></div>
-            <a href="tour.html"><button id="word-game-next-btn" class="btt" style="display:none;">Próxima Dica</button></a>
+        <div id="word-game-board">
+            <!-- Zonas de queda para a palavra "BECO DIAGONAL" -->
+            <div class="drop-zone b" data-letter="B"></div>
+            <div class="drop-zone" data-letter="E"></div>
+            <div class="drop-zone" data-letter="C"></div>
+            <div class="drop-zone o" data-letter="O"></div>
+            <div class="drop-zone" data-letter="D"></div>
+            <div class="drop-zone" data-letter="I"></div>
+            <div class="drop-zone" data-letter="A"></div>
+            <div class="drop-zone" data-letter="G"></div>
+            <div class="drop-zone" data-letter="O"></div>
+            <div class="drop-zone" data-letter="N"></div>
+            <div class="drop-zone" data-letter="A"></div>
+            <div class="drop-zone" data-letter="L"></div>
         </div>
+        <div id="word-game-letters">
+            <!-- Letras arrastáveis (embaralhadas) -->
+            <div class="draggable-letter" draggable="true" data-letter="G">G</div>
+            <div class="draggable-letter" draggable="true" data-letter="L">L</div>
+            <div class="draggable-letter" draggable="true" data-letter="A">A</div>
+            <div class="draggable-letter" draggable="true" data-letter="B">B</div>
+            <div class="draggable-letter" draggable="true" data-letter="N">N</div>
+            <div class="draggable-letter" draggable="true" data-letter="C">C</div>
+            <div class="draggable-letter" draggable="true" data-letter="I">I</div>
+            <div class="draggable-letter" draggable="true" data-letter="O">O</div>
+            <div class="draggable-letter" draggable="true" data-letter="E">E</div>
+            <div class="draggable-letter" draggable="true" data-letter="O">O</div>
+            <div class="draggable-letter" draggable="true" data-letter="A">A</div>
+            <div class="draggable-letter" draggable="true" data-letter="D">D</div>
+        </div>
+        <div id="word-game-result"></div>
+        <a href="tour.html"><button id="word-game-next-btn" class="btt" style="display:none;">Próxima Dica</button></a>
     </div>
 
     <script>
+        document.getElementById('start-btn').addEventListener('click', () => {
+            document.getElementById('intro-screen').classList.remove('active');
+            document.getElementById('word-game-container').classList.add('active');
+        });
+
         const letters = document.querySelectorAll('.draggable-letter');
         const dropZones = document.querySelectorAll('.drop-zone');
         const wordGameResult = document.getElementById('word-game-result');
@@ -256,3 +291,4 @@
     </script>
 </body>
 </html>
+
