@@ -238,7 +238,7 @@
             <div class="draggable-letter" draggable="true" data-letter="D">D</div>
         </div>
         <div id="word-game-result"></div>
-        <a href="tour.html"><button id="word-game-next-btn" class="btt" style="display:none;">Próxima Dica</button></a>
+        <a href="tour.html"><button id="word-game-next-btn" class="btt" style="display:none;">Vamos lá</button></a>
     </div>
 
     <script>
@@ -276,7 +276,7 @@
         function checkWordCompletion() {
             const formedWord = Array.from(dropZones).map(zone => zone.textContent).join('').replace(/\s+/g, '');
             if (formedWord === 'BECODIAGONAL') {
-                wordGameResult.textContent = 'Correto! Que tal darmos uma passadinha lá?';
+                wordGameResult.textContent = 'Correto! Agora vamos ver esse lugar mais de perto!!';
                 wordGameNextBtn.style.display = 'block';
                 wordGameResult.style.color = 'green';
             } else {
