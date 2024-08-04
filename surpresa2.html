@@ -154,8 +154,7 @@
 <body>
     <div class="container" id="page-introduction">
         <h2>Desafio 2</h2>
-        <p class="pp">Agora é um "quiz" sobre a saga de uns dos seus filmes favoritos.
-        </p>
+        <p class="pp">Agora é um "quiz" sobre a saga de uns dos seus filmes favoritos.</p>
         <button id="start-quiz-btn">Iniciar</button>
     </div>
     
@@ -168,6 +167,7 @@
             <button class="quiz-option"></button>
             <div id="quiz-result" class="quiz-result"></div>
             <button id="next-question-btn" class="ll hidden">Próxima Pergunta</button>
+            <div id="finish-message" class="hidden">Parabéns! Você completou o quiz.</div>
             <a href="surpresa3.html"><button id="go-to-place-btn" class="hidden">Próxima Dica</button></a>
         </div>
     </div>
@@ -259,7 +259,7 @@
             if (currentQuestionIndex < questions.length) {
                 loadQuestion();
             } else {
-                quizQuestion.textContent = 'Parabéns! Você completou o quiz.';
+                quizQuestion.textContent = '';
                 quizOptions.forEach(option => option.style.display = 'none');
                 nextQuestionBtn.classList.add('hidden');
                 finishMessage.classList.remove('hidden');
