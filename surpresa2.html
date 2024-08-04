@@ -94,7 +94,7 @@
             color: #007BFF;
         }
 
-        .pp{
+        .pp {
             font-size: 25px;
         }
 
@@ -125,12 +125,13 @@
     
     <div class="container" id="page-quiz" style="display: none;">
         <div class="quiz-container">
-            <div id="quiz-question" class="quiz-question">Qual é a sua pergunta?</div>
-            <button class="quiz-option">Opção 1</button>
-            <button class="quiz-option">Opção 2</button>
-            <button class="quiz-option">Opção 3</button>
-            <button class="quiz-option">Opção 4</button>
+            <div id="quiz-question" class="quiz-question"></div>
+            <button class="quiz-option"></button>
+            <button class="quiz-option"></button>
+            <button class="quiz-option"></button>
+            <button class="quiz-option"></button>
             <div id="quiz-result" class="quiz-result"></div>
+            <button id="next-question-btn" style="display: none;">Próxima Pergunta</button>
         </div>
     </div>
 
@@ -138,13 +139,80 @@
         const startQuizBtn = document.getElementById('start-quiz-btn');
         const pageIntroduction = document.getElementById('page-introduction');
         const pageQuiz = document.getElementById('page-quiz');
+        const quizQuestion = document.getElementById('quiz-question');
+        const quizOptions = document.querySelectorAll('.quiz-option');
+        const quizResult = document.getElementById('quiz-result');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+
+        const questions = [
+            {
+                question: "Qual é o lugar famoso para comprar varinhas mágicas em Harry Potter?",
+                options: ["Beco Diagonal", "Hogsmeade", "Godric's Hollow", "O Ministério da Magia"],
+                answer: "Beco Diagonal"
+            },
+            {
+                question: "Qual loja é conhecida por vender varinhas em Beco Diagonal?",
+                options: ["Oliveira e Filhos", "Taverna Três Vassouras", "Lojinha do Harry", "Gringotes"],
+                answer: "Oliveira e Filhos"
+            },
+            {
+                question: "Qual é o nome do banco dos bruxos em Harry Potter?",
+                options: ["Gringotes", "Banco dos Bruxos", "Banco Mágico", "Tesouros Mágicos"],
+                answer: "Gringotes"
+            },
+            {
+                question: "Qual é a loja famosa de quadribol em Beco Diagonal?",
+                options: ["Ferro e Fogo", "Empório das Varinhas", "A Loja do Quadribol", "Sapo de Chocolate"],
+                answer: "A Loja do Quadribol"
+            },
+            {
+                question: "Qual é o nome da rua onde você encontra o Caldeirão Furado?",
+                options: ["Rua dos Dragões", "Beco Diagonal", "Rua dos Feiticeiros", "Avenida Mágica"],
+                answer: "Beco Diagonal"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        function loadQuestion() {
+            const question = questions[currentQuestionIndex];
+            quizQuestion.textContent = question.question;
+            quizOptions.forEach((option, index) => {
+                option.textContent = question.options[index];
+                option.addEventListener('click', () => checkAnswer(option.textContent));
+            });
+            nextQuestionBtn.style.display = 'none';
+            quizResult.textContent = '';
+        }
+
+        function checkAnswer(selectedAnswer) {
+            const correctAnswer = questions[currentQuestionIndex].answer;
+            if (selectedAnswer === correctAnswer) {
+                quizResult.textContent = 'Resposta correta!';
+                quizResult.style.color = 'green';
+            } else {
+                quizResult.textContent = 'Resposta incorreta. Tente novamente!';
+                quizResult.style.color = 'red';
+            }
+            nextQuestionBtn.style.display = 'block';
+        }
+
+        nextQuestionBtn.addEventListener('click', () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                quizQuestion.textContent = 'Parabéns! Você completou o quiz.';
+                quizOptions.forEach(option => option.style.display = 'none');
+                nextQuestionBtn.style.display = 'none';
+            }
+        });
 
         startQuizBtn.addEventListener('click', () => {
             pageIntroduction.style.display = 'none';
             pageQuiz.style.display = 'flex';
+            loadQuestion();
         });
-
-        // Adicione a lógica do quiz aqui
     </script>
 </body>
 </html>
